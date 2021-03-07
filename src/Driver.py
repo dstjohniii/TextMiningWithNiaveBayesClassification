@@ -4,45 +4,38 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 def main():
-    np.random.seed(4)
-
-    # Get Data
-    biniary_dataset = np.genfromtxt('BinaryData.csv', delimiter=',', skip_header=True, usecols=(0, 1, 2, 3, 4, 5, 6))
-    non_biniary_dataset = np.genfromtxt('NonBinaryData.csv', delimiter=',', skip_header=True, usecols=(0, 1, 2, 3, 4, 5, 6))
-    
     #Test Sentences
+    sentences = []
+    sentences.append("the puppy ate my computer science homework.")
+    sentences.append("i went to school for a computer science convention.")
+    sentences.append("i took a long drive last night to clear my mind")
+    sentences.append("i spent my time watching tv while i was working")
+    sentences.append("computers are my favorite puppy they are they")
     
-    test1 = "the puppy ate my computer science homework"
-    
-    #Convert to keywords
-    keywords_present= convert_to_keywords_binary(test1)
-    keywords_count = convert_to_keywords_count(test1)
-    
-    result_binary = bayes_classification(biniary_dataset, keywords_present)
-    print(test1)
-    print(f"is sentence cs? {result_binary}")
-    print()
-    
-    result_count = bayes_continuous_classification(non_biniary_dataset, keywords_count)
-    print(test1)
-    print(f"is sentence cs? {result_count}")
-    print()
+    problem1(sentences)
+    problem2(sentences)
 
 def problem1(sentences):
     biniary_dataset = np.genfromtxt('BinaryData.csv', delimiter=',', skip_header=True, usecols=(0, 1, 2, 3, 4, 5, 6))
-    keywords_present = convert_to_keywords_binary(test1)
-    result_binary = bayes_classification(biniary_dataset, keywords_present)
-    print(test1)
-    print(f"is sentence cs? {result_binary}")
-    print()
+    
+    for sentence in sentences:
+        keywords_present = convert_to_keywords_binary(sentence)
+        result_binary = bayes_classification(biniary_dataset, keywords_present)
+        print(sentence)
+        print(f"is sentence cs? {result_binary}")
+        print()
+        
+    
 
 def problem2(sentences):
     non_biniary_dataset = np.genfromtxt('NonBinaryData.csv', delimiter=',', skip_header=True, usecols=(0, 1, 2, 3, 4, 5, 6))
-    keywords_count = convert_to_keywords_count(test1)
-    result_count = bayes_continuous_classification(non_biniary_dataset, keywords_count)
-    print(test1)
-    print(f"is sentence cs? {result_count}")
-    print()
+    
+    for sentence in sentences:
+        keywords_count = convert_to_keywords_count(sentence)
+        result_count = bayes_continuous_classification(non_biniary_dataset, keywords_count)
+        print(sentence)
+        print(f"is sentence cs? {result_count}")
+        print()
     
     
 def bayes_classification(dataset, keywords):
